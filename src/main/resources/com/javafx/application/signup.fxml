@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<SplitPane dividerPositions="0.34625668449197855" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javafx.application.SignupController">
+  <items>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Label alignment="CENTER" layoutX="21.0" layoutY="14.0" prefHeight="61.0" prefWidth="162.0" text="Song Manager" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font></Label>
+            <ImageView fitHeight="311.0" fitWidth="210.0" layoutX="2.0" layoutY="85.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@loginspriteart.png" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+         <children>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="88.0" prefHeight="40.0" prefWidth="122.0" text="Username" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="128.0" prefHeight="40.0" prefWidth="122.0" text="Password" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <Button fx:id="signupButton" layoutX="52.0" layoutY="313.0" mnemonicParsing="false" onAction="#signupOnAction" prefHeight="26.0" prefWidth="284.0" style="-fx-background-color: #24273a;" text="Sign up" textAlignment="CENTER" textFill="#cad3f5">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <Button fx:id="switchToLoginButton" layoutX="52.0" layoutY="350.0" mnemonicParsing="false" onAction="#switchToLoginOnAction" prefHeight="26.0" prefWidth="284.0" style="-fx-background-color: #24273a;" text="Already have an account ? Back to Login" textAlignment="CENTER" textFill="#cad3f5">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+            <TextField fx:id="textFieldUsername" layoutX="146.0" layoutY="95.0" prefHeight="26.0" prefWidth="210.0" />
+             <PasswordField fx:id="passwordField" layoutX="146.0" layoutY="134.0" prefHeight="26.0" prefWidth="210.0" />
+            <Label alignment="CENTER" layoutX="14.0" layoutY="168.0" prefHeight="40.0" prefWidth="121.0" text="Confirm Password" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="confirmPasswordField" layoutX="146.0" layoutY="174.0" prefHeight="26.0" prefWidth="210.0" />
+         </children></AnchorPane>
+  </items>
+</SplitPane>

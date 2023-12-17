@@ -3,7 +3,6 @@ package com.javafx.application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
-import org.w3c.dom.Text;
 
 public class MainController {
 
@@ -27,16 +26,19 @@ public class MainController {
 
 
     @FXML
-    public void search(ActionEvent actionEvent) {
-        // Xử lý sự kiện khi nút "Search" được nhấn
+    public void searchOnAction(ActionEvent actionEvent) {
         System.out.println("Search button clicked");
     }
 
-    public void clear(ActionEvent actionEvent) {
+    public void clearOnAction(ActionEvent actionEvent) {
         // debug
         System.out.println("Clear button clicked");
         // clear all the text fields
-
+        textFieldID.clear();
+        textFieldTitle.clear();
+        textFieldArtist.clear();
+        textFieldAlbum.clear();
+        textFieldGenre.clear();
     }
 }
 

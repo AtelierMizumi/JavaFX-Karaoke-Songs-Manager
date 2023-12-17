@@ -113,8 +113,8 @@
    <right>
       <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" onAction="#search" prefHeight="90.0" prefWidth="100.0" text="Search" />
-            <Button mnemonicParsing="false" onAction="#clear" prefHeight="90.0" prefWidth="100.0" text="Clear" />
+            <Button mnemonicParsing="false" onAction="#searchOnAction" prefHeight="90.0" prefWidth="100.0" text="Search" />
+            <Button mnemonicParsing="false" onAction="#clearOnAction" prefHeight="90.0" prefWidth="100.0" text="Clear" />
          </children>
       </VBox>
    </right>
