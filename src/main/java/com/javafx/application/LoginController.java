@@ -32,11 +32,13 @@ public class LoginController {
         String result = validateLogin(username, password);
         Alert alert;
         if (result.equals("Login successful")) {
+            // close login window
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
             stage.close();
+            // open app window
             try {
                 Stage stage1 = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                LaunchGUI.launch(stage1, "main.fxml", "Song Library");
+                LaunchGUI.launch(stage1, "app.fxml", "Song Library");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -82,7 +84,7 @@ public class LoginController {
         } else {
             try {
                 Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-                String sql = "SELECT password, salt FROM userlogininfotable WHERE username = ?";
+                String sql = "SELECT password, salt FROM userinfo WHERE username = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, username);
                 ResultSet resultSet = statement.executeQuery();
@@ -114,9 +116,7 @@ public class LoginController {
     }
 
     public void setApp(Login application){
-        // setApp() method is used to pass reference of Main application to MainController.
-        // This reference is used to call the stop() method defined in Main.java
-        // when the user clicks on the close button of the main window.
+
     }
 
 

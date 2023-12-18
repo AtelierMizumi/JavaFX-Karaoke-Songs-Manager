@@ -42,7 +42,7 @@ public class SignupController {
                 Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
                 stage.close();
                 // open main window
-                Main main = new Main();
+                App main = new App();
             }
         } else if (result.equals("Username already exists." + "\n" + "Do you want to login or try again?")) {
             ButtonType loginButtonType = new ButtonType("Switch to Login");
@@ -80,7 +80,7 @@ public class SignupController {
         } else {
             try {
                 Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
-                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM userlogininfotable WHERE username = ?");
+                PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM userinfo WHERE username = ?");
                 preparedStatement.setString(1, username);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
@@ -90,7 +90,7 @@ public class SignupController {
                     String salt =  PasswordUtils.generateSalt();
                     String hashedPassword = PasswordUtils.hashPassword(password, salt);
                     // Insert new user into database
-                    preparedStatement = connection.prepareStatement("INSERT INTO userlogininfotable (username, password, salt) VALUES (?, ?, ?)");
+                    preparedStatement = connection.prepareStatement("INSERT INTO userinfo (username, password, salt) VALUES (?, ?, ?)");
                     preparedStatement.setString(1, username);
                     preparedStatement.setString(2, hashedPassword);
                     preparedStatement.setString(3, salt);

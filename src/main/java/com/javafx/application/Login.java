@@ -10,6 +10,6 @@ public class Login extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        LaunchGUI.launch(primaryStage, "login.fxml", "Login");
+        LaunchGUI.launch(primaryStage, "login.fxml", "Login to existing account");
     }
 }

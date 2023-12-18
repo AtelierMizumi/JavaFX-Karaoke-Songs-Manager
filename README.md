@@ -1,11 +1,12 @@
 # Karaoke Song Manager
 
-## Built with JavaFX, MySQL and Maven
+## Built with JavaFX, SceneBuilder, MySQL and Maven
 - Dependencies:
-  - Java 8
-  - MySQL 5.7
+  - Java 21
+  - MySQL and MySQL Connector
     - Download MySQL JDBC Connector Jar 
   - Maven 3.6.3
+  - Font Awesome Icons
 
 ### Get the source code:
 > git clone https://github.com/AtelierMizumi/JavaFX-Karaoke-Songs-Manager.git

@@ -4,29 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="created login and sign up screen, scene switcher">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/LaunchGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/Login.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/PasswordUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/Signup.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/SignupController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/loginspriteart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/signup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="I forgot these unversioned files">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AudioUploadUtils.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/default-dark.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/default.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/license.md" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/SQLConnector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/icon.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/main.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/SignupController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/app.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/main.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +30,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
+        <option value="CSS File" />
+        <option value="FxmlFile" />
         <option value="Class" />
       </list>
     </option>
@@ -83,13 +78,15 @@
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "git-widget-placeholder": "master",
+    "import_schema_mapping": "<schema-mapping>\n  <databases>\n    <list>\n      <schema-mapping-item>\n        <source-data-source-id>ed8646d3-47ee-4916-ba89-103cea125abc</source-data-source-id>\n        <source-path>schema/&quot;karaoke&quot;</source-path>\n        <target-data-source-id>ed8646d3-47ee-4916-ba89-103cea125abc</target-data-source-id>\n        <target-path>schema/&quot;karaoke&quot;</target-path>\n      </schema-mapping-item>\n    </list>\n  </databases>\n</schema-mapping>",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
-    "last_opened_file_path": "C:/Users/Moderator/IdeaProjects/JavaFX/src/main/resources/com/javafx/application",
+    "last_opened_file_path": "C:/Users/Moderator/Downloads/fontawesomefx-8.9.jar",
+    "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
+    "project.structure.last.edited": "Project",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "preferences.JavaFX",
@@ -115,10 +112,13 @@
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.javafx.application" />
     </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="com.javafx.application" />
+    </key>
   </component>
   <component name="RunManager" selected="Application.Login">
-    <configuration name="Login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.javafx.application.Login" />
+    <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.javafx.application.App" />
       <module name="JavaFX" />
       <extension name="coverage">
         <pattern>
@@ -130,8 +130,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.javafx.application.Main" />
+    <configuration name="Login" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.javafx.application.Login" />
       <module name="JavaFX" />
       <extension name="coverage">
         <pattern>
@@ -146,7 +146,6 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Login" />
-        <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -185,7 +184,12 @@
       <workItem from="1702736291747" duration="599000" />
       <workItem from="1702763173075" duration="2894000" />
       <workItem from="1702791306958" duration="309000" />
-      <workItem from="1702791638582" duration="16797000" />
+      <workItem from="1702791638582" duration="19402000" />
+      <workItem from="1702837957982" duration="1547000" />
+      <workItem from="1702892761602" duration="8472000" />
+      <workItem from="1702917048593" duration="805000" />
+      <workItem from="1702918486765" duration="19000" />
+      <workItem from="1702893451447" duration="385000" />
     </task>
     <task id="LOCAL-00001" summary="init code">
       <option name="closed" value="true" />
@@ -219,7 +223,23 @@
       <option name="project" value="LOCAL" />
       <updated>1702788430079</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="clean up unused imports and variables">
+      <option name="closed" value="true" />
+      <created>1702812535946</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1702812535946</updated>
+    </task>
+    <task id="LOCAL-00006" summary="I forgot these unversioned files">
+      <option name="closed" value="true" />
+      <created>1702812966020</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1702812966020</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,7 +261,9 @@
     <MESSAGE value="update gitignore, add unversioned files" />
     <MESSAGE value="changed branch, have to add license again" />
     <MESSAGE value="created login and sign up screen, scene switcher" />
-    <option name="LAST_COMMIT_MESSAGE" value="created login and sign up screen, scene switcher" />
+    <MESSAGE value="clean up unused imports and variables" />
+    <MESSAGE value="I forgot these unversioned files" />
+    <option name="LAST_COMMIT_MESSAGE" value="I forgot these unversioned files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
