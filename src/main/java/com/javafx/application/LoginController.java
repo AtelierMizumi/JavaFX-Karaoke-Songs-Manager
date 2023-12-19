@@ -4,11 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
-// Password hashing imports
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,11 +18,14 @@ public class LoginController {
     public PasswordField passwordField;
     @FXML
     private TextField textFieldUsername;
-
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/karaoke";
-    private static final String DATABASE_USERNAME = "thuanc177";
-    private static final String DATABASE_PASSWORD = "14032005";
-
+    @FXML
+    public void initialize() {
+        passwordField.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                loginOnAction(new ActionEvent());
+            }
+        });
+    }
     @FXML
     public void loginOnAction(ActionEvent actionEvent) {
         String username = textFieldUsername.getText();
@@ -32,15 +34,21 @@ public class LoginController {
         String result = validateLogin(username, password);
         Alert alert;
         if (result.equals("Login successful")) {
-            // close login window
-            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-            stage.close();
-            // open app window
-            try {
-                Stage stage1 = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                LaunchGUI.launch(stage1, "app.fxml", "Song Library");
-            } catch (Exception e) {
-                e.printStackTrace();
+            alert = new Alert(Alert.AlertType.INFORMATION, result, ButtonType.OK);
+            alert.setTitle("Login Successful");
+            alert.setHeaderText(null);
+            Optional<ButtonType> resultButtonType = alert.showAndWait();
+            if (resultButtonType.isPresent() && resultButtonType.get() == ButtonType.OK) {
+                // close login window
+                Stage stage = (Stage) passwordField.getScene().getWindow();
+                stage.close();
+                // open app window
+                try {
+                    Stage stage1 = (Stage) passwordField.getScene().getWindow();
+                    LaunchGUI.launch(stage1, "app.fxml", "Song Manager");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } else if (result.equals("Username does not exist." + "\n" + "Do you want to sign up or try again?")) {
             ButtonType signUpButtonType = new ButtonType("Sign up");
@@ -51,11 +59,11 @@ public class LoginController {
             Optional<ButtonType> resultButtonType = alert.showAndWait();
             if (resultButtonType.isPresent() && resultButtonType.get() == signUpButtonType) {
                 // close login window
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                Stage stage = (Stage) passwordField.getScene().getWindow();
                 stage.close();
                 // open signup window
                 try {
-                    Stage stage1 = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+                    Stage stage1 = (Stage) passwordField.getScene().getWindow();
                     LaunchGUI.launch(stage1, "signup.fxml", "Signup new account");
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -83,7 +91,7 @@ public class LoginController {
             return "Username and password cannot contain space";
         } else {
             try {
-                Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+                Connection connection = DatabaseHandler.getInstance().getConnection();
                 String sql = "SELECT password, salt FROM userinfo WHERE username = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, username);
@@ -105,6 +113,7 @@ public class LoginController {
             }
         }
     }
+
     public void switchToSignupOnAction(ActionEvent actionEvent) {
         try {
             Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -118,6 +127,4 @@ public class LoginController {
     public void setApp(Login application){
 
     }
-
-
 }

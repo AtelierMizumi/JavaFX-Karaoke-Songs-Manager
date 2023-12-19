@@ -4,22 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="I forgot these unversioned files">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AudioUploadUtils.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/default-dark.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/default.css" afterDir="false" />
+    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="decided to change from MySQL to H2 local database">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/fontawesomefx.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/h2driver.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/DatabaseHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/Song.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/fontawesomefx_8_9.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/mysql_connector_j_8_2_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/Login.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/Login.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/LaunchGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/LaunchGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AppController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/SignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/app.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/main.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/main.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/app.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javafx/application/app.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +35,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="CSS File" />
         <option value="FxmlFile" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -56,6 +62,13 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="usePluginRegistry" value="true" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -73,6 +86,10 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -80,34 +97,39 @@
     "git-widget-placeholder": "master",
     "import_schema_mapping": "<schema-mapping>\n  <databases>\n    <list>\n      <schema-mapping-item>\n        <source-data-source-id>ed8646d3-47ee-4916-ba89-103cea125abc</source-data-source-id>\n        <source-path>schema/&quot;karaoke&quot;</source-path>\n        <target-data-source-id>ed8646d3-47ee-4916-ba89-103cea125abc</target-data-source-id>\n        <target-path>schema/&quot;karaoke&quot;</target-path>\n      </schema-mapping-item>\n    </list>\n  </databases>\n</schema-mapping>",
     "jdk.selected.JAVA_MODULE": "openjdk-21",
-    "last_opened_file_path": "C:/Users/Moderator/Downloads/fontawesomefx-8.9.jar",
+    "last_opened_file_path": "C:/Users/Moderator/IdeaProjects/JavaFX/src/main/resources/external-libraries/h2driver.jar",
     "list.type.of.created.stylesheet": "CSS",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Project",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "preferences.JavaFX",
+    "settings.editor.selected.configurable": "reference.settings.project.maven.runner",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
     "DatabaseDriversLRU": [
-      "mysql"
+      "mysql",
+      "h2"
     ]
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.javafx.application" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Moderator\IdeaProjects\JavaFX\src\main\resources\com\javafx\application" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Moderator\IdeaProjects\JavaFX\src\main\resources\com\javafx\application\external_library" />
       <recent name="C:\Users\Moderator\IdeaProjects\JavaFX\src\main\resources\com\javafx\application" />
       <recent name="C:\Users\Moderator\IdeaProjects\JavaFX\src\main\java\com\javafx\application" />
       <recent name="C:\Users\Moderator\IdeaProjects\JavaFX\src\main\java" />
       <recent name="C:\Users\Moderator\IdeaProjects\JavaFX\src\main\resources" />
-      <recent name="C:\Users\Moderator\IdeaProjects\JavaFX\src" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="com.javafx.application" />
@@ -116,7 +138,7 @@
       <recent name="com.javafx.application" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Login">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.javafx.application.App" />
       <module name="JavaFX" />
@@ -145,6 +167,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.App" />
         <item itemvalue="Application.Login" />
       </list>
     </recent_temporary>
@@ -189,7 +212,11 @@
       <workItem from="1702892761602" duration="8472000" />
       <workItem from="1702917048593" duration="805000" />
       <workItem from="1702918486765" duration="19000" />
-      <workItem from="1702893451447" duration="385000" />
+      <workItem from="1702893451447" duration="409000" />
+      <workItem from="1702944742769" duration="3439000" />
+      <workItem from="1702948219534" duration="447000" />
+      <workItem from="1702948677218" duration="5388000" />
+      <workItem from="1702955296299" duration="15634000" />
     </task>
     <task id="LOCAL-00001" summary="init code">
       <option name="closed" value="true" />
@@ -239,7 +266,15 @@
       <option name="project" value="LOCAL" />
       <updated>1702812966020</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="create an entire new app.fxml to work on">
+      <option name="closed" value="true" />
+      <created>1702893855371</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1702893855371</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -263,7 +298,8 @@
     <MESSAGE value="created login and sign up screen, scene switcher" />
     <MESSAGE value="clean up unused imports and variables" />
     <MESSAGE value="I forgot these unversioned files" />
-    <option name="LAST_COMMIT_MESSAGE" value="I forgot these unversioned files" />
+    <MESSAGE value="create an entire new app.fxml to work on" />
+    <option name="LAST_COMMIT_MESSAGE" value="create an entire new app.fxml to work on" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -274,5 +310,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

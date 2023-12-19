@@ -4,10 +4,10 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,12 +21,14 @@ public class SignupController {
     private TextField confirmPasswordField;
     @FXML
     private TextField textFieldUsername;
-
-
-    private static final String DATABASE_URL = "jdbc:mysql://localhost:3306/karaoke";
-    private static final String DATABASE_USERNAME = "thuanc177";
-    private static final String DATABASE_PASSWORD = "14032005";
-
+    @FXML
+    public void initialize() {
+        passwordField.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.ENTER){
+                signupOnAction(null);
+            }
+        });
+    }
     @FXML
     public void signupOnAction(ActionEvent actionEvent) {
         String username = textFieldUsername.getText();
@@ -37,12 +39,16 @@ public class SignupController {
         Alert alert;
         if (result.equals("Signup successful")) {
             alert = new Alert(Alert.AlertType.INFORMATION, result, ButtonType.OK);
-            if (alert.getResult() == ButtonType.OK) {
-                // close signup window
-                Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
-                stage.close();
-                // open main window
-                App main = new App();
+            alert.showAndWait();
+            // close signup window
+            Stage stage = (Stage) passwordField.getScene().getWindow();
+            stage.close();
+            // open login window
+            try {
+                Stage stage1 = (Stage) passwordField.getScene().getWindow();
+                LaunchGUI.launch(stage1, "app.fxml", "Song Library");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else if (result.equals("Username already exists." + "\n" + "Do you want to login or try again?")) {
             ButtonType loginButtonType = new ButtonType("Switch to Login");
@@ -79,7 +85,7 @@ public class SignupController {
             return "Password does not match.";
         } else {
             try {
-                Connection connection = DriverManager.getConnection(DATABASE_URL, DATABASE_USERNAME, DATABASE_PASSWORD);
+                Connection connection = DatabaseHandler.getInstance().getConnection();
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM userinfo WHERE username = ?");
                 preparedStatement.setString(1, username);
                 ResultSet resultSet = preparedStatement.executeQuery();

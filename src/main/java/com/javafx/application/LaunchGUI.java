@@ -18,6 +18,7 @@ public class LaunchGUI {
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle(title);
+            primaryStage.setResizable(false);
             primaryStage.getIcons().add(new Image(Objects.requireNonNull(LaunchGUI.class.getResourceAsStream("icon.png"))));
             primaryStage.show();
         } catch (IOException e) {
