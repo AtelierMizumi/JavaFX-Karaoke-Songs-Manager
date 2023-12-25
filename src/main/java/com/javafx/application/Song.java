@@ -1,5 +1,8 @@
 package com.javafx.application;
 
+import java.sql.Blob;
+
+
 public class Song {
     private int id;
     private String title;
@@ -7,12 +10,15 @@ public class Song {
     private String artist;
     private String length;
 
-    public Song(int id, String title, String album, String artist, String length) {
+    private Blob audioData;
+
+    public Song(int id, String title, String album, String artist, String length, Blob audioData) {
         this.id = id;
         this.title = title;
         this.album = album;
         this.artist = artist;
         this.length = length;
+        this.audioData = audioData;
     }
 
     public Song() {
@@ -57,5 +63,13 @@ public class Song {
 
     public void setLength(String length) {
         this.length = length;
+    }
+
+    public Blob getAudioData() {
+        return audioData;
+    }
+
+    public void setAudioData(Blob audioData) {
+        this.audioData = audioData;
     }
 }

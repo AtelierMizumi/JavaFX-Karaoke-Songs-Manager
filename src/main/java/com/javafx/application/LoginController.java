@@ -1,5 +1,7 @@
 package com.javafx.application;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -16,8 +18,12 @@ import java.util.Optional;
 public class LoginController {
     @FXML
     public PasswordField passwordField;
+    public Button loginButton;
     @FXML
     private TextField textFieldUsername;
+    @FXML
+    private Button showPasswordButton;
+
     @FXML
     public void initialize() {
         passwordField.setOnKeyReleased(event -> {
@@ -123,8 +129,26 @@ public class LoginController {
         }
 
     }
+    private Tooltip currentTooltip = null; // Add this line
+    public void showPasswordButtonOnAction(ActionEvent actionEvent) {
+        if (currentTooltip != null) {
+            currentTooltip.hide();
+        }
 
-    public void setApp(Login application){
+        Tooltip passwordToolTip = new Tooltip();
+        passwordToolTip.setText(passwordField.getText());
 
+        javafx.geometry.Point2D point = passwordField.localToScreen(0, 0);
+        double x = point.getX();
+        double y = point.getY() + passwordField.getHeight();
+        passwordToolTip.show(passwordField, x, y);
+
+        currentTooltip = passwordToolTip; // Add this line
+
+        passwordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                passwordToolTip.hide();
+            }
+        });
     }
 }

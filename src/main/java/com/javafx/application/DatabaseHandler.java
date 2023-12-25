@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class DatabaseHandler {
@@ -54,10 +55,11 @@ public class DatabaseHandler {
         return conn;
     }
 
+
     private void createDatabaseAndTableIfNotExist() {
         try {
             String sqlSongList = "CREATE TABLE IF NOT EXISTS songlist (" +
-                    "id INT AUTO_INCREMENT PRIMARY KEY, " +
+                    "id INT PRIMARY KEY, " +
                     "title VARCHAR(255) NOT NULL, " +
                     "artist VARCHAR(255), " +
                     "album VARCHAR(255), " +
@@ -136,40 +138,35 @@ public class DatabaseHandler {
         statement.execute();
     }
 
-    public List<Song> getAllSongs() {
-        List<Song> SONGLIST = new ArrayList<>();
+    public List<Song> getAllSongs() throws SQLException {
         try {
-            PreparedStatement preparedStatement = conn.prepareStatement("SELECT * FROM SONGLIST");
-            ResultSet resultSet = preparedStatement.executeQuery();
+            String sql = "SELECT * FROM songlist";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            List<Song> songs = new ArrayList<>();
             while (resultSet.next()) {
-                Song song = new Song();
-                song.setId(resultSet.getInt("id"));
-                song.setTitle(resultSet.getString("title"));
-                song.setAlbum(resultSet.getString("album"));
-                song.setArtist(resultSet.getString("artist"));
-                song.setLength(resultSet.getString("length"));
-                SONGLIST.add(song);
+                int id = resultSet.getInt("id");
+                String title = resultSet.getString("title");
+                String artist = resultSet.getString("artist");
+                String album = resultSet.getString("album");
+                String length = resultSet.getString("length");
+                Blob audioData = resultSet.getBlob("audiodata");
+                songs.add(new Song(id, title, artist, album, length, audioData));
             }
+            return songs;
         } catch (SQLException e) {
             e.printStackTrace();
+            return Collections.emptyList();
         }
-        return SONGLIST;
     }
-    public void addSong(Song song, String audioFilePath) {
-        try {
-            PreparedStatement preparedStatement = conn.prepareStatement("INSERT INTO SONGLIST (title, album, artist, length, audiodata) VALUES (?, ?, ?, ?, ?)");
-            preparedStatement.setString(1, song.getTitle());
-            preparedStatement.setString(2, song.getAlbum());
-            preparedStatement.setString(3, song.getArtist());
-            preparedStatement.setString(4, song.getLength());
-
-            File audioFile = new File(audioFilePath);
-            FileInputStream fis = new FileInputStream(audioFile);
-            preparedStatement.setBinaryStream(5, fis, (int) audioFile.length());
-
-            preparedStatement.executeUpdate();
-        } catch (SQLException | FileNotFoundException e) {
-            e.printStackTrace();
-        }
+    public void insertSong(Song song) throws SQLException {
+        String sql = "INSERT INTO SONGLIST (title, album, artist, length, audiodata) VALUES (?, ?, ?, ?, ?)";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, song.getTitle());
+        statement.setString(2, song.getAlbum());
+        statement.setString(3, song.getArtist());
+        statement.setString(4, song.getLength());
+        statement.setBlob(5, song.getAudioData());
+        statement.execute();
     }
 }

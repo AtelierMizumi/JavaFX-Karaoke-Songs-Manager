@@ -22,6 +22,10 @@ public class SignupController {
     @FXML
     private TextField textFieldUsername;
     @FXML
+    private Button showPasswordButton;
+    @FXML
+    private Button showConfirmPasswordButton;
+    @FXML
     public void initialize() {
         passwordField.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER){
@@ -109,6 +113,50 @@ public class SignupController {
                 return "Signup failed";
             }
         }
+    }
+    private Tooltip currentTooltip = null; // Add this line
+
+    public void showPasswordButtonOnAction(ActionEvent actionEvent) {
+        if (currentTooltip != null) {
+            currentTooltip.hide();
+        }
+
+        Tooltip passwordToolTip = new Tooltip();
+        passwordToolTip.setText(passwordField.getText());
+
+        javafx.geometry.Point2D point = passwordField.localToScreen(0, 0);
+        double x = point.getX();
+        double y = point.getY() + passwordField.getHeight();
+        passwordToolTip.show(passwordField, x, y);
+
+        currentTooltip = passwordToolTip; // Add this line
+
+        passwordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                passwordToolTip.hide();
+            }
+        });
+    }
+    public void showConfirmPasswordButtonOnAction(){
+        if (currentTooltip != null) {
+            currentTooltip.hide();
+        }
+
+        Tooltip passwordToolTip = new Tooltip();
+        passwordToolTip.setText(confirmPasswordField.getText());
+
+        javafx.geometry.Point2D point = confirmPasswordField.localToScreen(0, 0);
+        double x = point.getX();
+        double y = point.getY() + confirmPasswordField.getHeight();
+        passwordToolTip.show(confirmPasswordField, x, y);
+
+        currentTooltip = passwordToolTip; // Add this line
+
+        confirmPasswordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue) {
+                passwordToolTip.hide();
+            }
+        });
     }
     public void switchToLoginOnAction(ActionEvent actionEvent) {
         try {

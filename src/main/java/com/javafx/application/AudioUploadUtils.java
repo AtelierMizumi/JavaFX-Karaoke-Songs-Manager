@@ -1,49 +1,22 @@
 package com.javafx.application;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.HBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.OutputStream;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
-public class AudioUploadUtils extends Application {
+public class AudioUploadUtils {
 
     private TextField filePathTextField;
-
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-        primaryStage.setTitle("Audio Upload Field");
-
-        HBox root = new HBox(10);
-
-        Label label = new Label("Select an audio file:");
-        filePathTextField = new TextField();
-        filePathTextField.setPrefColumnCount(20);
-        filePathTextField.setEditable(false);
-
-        Button browseButton = new Button("Browse");
-        browseButton.setOnAction(e -> openFileChooser());
-
-        Button uploadButton = new Button("Upload");
-        uploadButton.setOnAction(e -> processUploadedFile());
-
-        root.getChildren().addAll(label, filePathTextField, browseButton, uploadButton);
-
-        Scene scene = new Scene(root, 500, 100);
-        primaryStage.setScene(scene);
-
-        primaryStage.show();
-    }
 
     private void openFileChooser() {
         FileChooser fileChooser = new FileChooser();
@@ -59,16 +32,6 @@ public class AudioUploadUtils extends Application {
         }
     }
 
-    private void processUploadedFile() {
-        // Implement the logic to upload the audio file to the database
-        // Use filePathTextField.getText() to get the selected file path
-        // You can use JDBC or an ORM framework like Hibernate for database interactions
-        // Insert the file or its metadata into the database, depending on your requirements
-        // For simplicity, we print the file path here
-        String filePath = filePathTextField.getText();
-        System.out.println("Uploaded audio file: " + filePath);
-    }
-
     public static byte[] convertAudioToBytes(String filePath) {
         byte[] audioBytes = null;
         try {
@@ -81,5 +44,47 @@ public class AudioUploadUtils extends Application {
             e.printStackTrace();
         }
         return audioBytes;
+    }
+
+    public static String getAudioDuration(String audioFilePath) {
+        Media media = new Media(new File(audioFilePath).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        final String[] length = new String[1];
+        final CountDownLatch latch = new CountDownLatch(1);
+        mediaPlayer.setOnReady(() -> {
+            Duration duration = media.getDuration();
+            int durationInSeconds = (int) Math.floor(duration.toSeconds());
+            int minutes = durationInSeconds / 60;
+            int seconds = durationInSeconds % 60;
+            length[0] = String.format("%d:%02d", minutes, seconds);
+            latch.countDown();
+        });
+        try {
+            latch.await(5, TimeUnit.SECONDS); // wait for mediaPlayer to be ready
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return length[0];
+    }
+
+    public static Blob convertAudioToBlob(String filePath) {
+        Blob blob = null;
+        try {
+            File audioFile = new File(filePath);
+            FileInputStream fis = new FileInputStream(audioFile);
+            Connection conn = DatabaseHandler.getInstance().getConnection();
+            blob = conn.createBlob();
+            OutputStream os = blob.setBinaryStream(1);
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+            os.close();
+            fis.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return blob;
     }
 }
