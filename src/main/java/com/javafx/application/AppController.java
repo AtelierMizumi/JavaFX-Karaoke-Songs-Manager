@@ -103,8 +103,6 @@ public class AppController {
     @FXML
     private TextField addTabTitleTextField;
     @FXML
-    private TextField editTabIDTextField;
-    @FXML
     private TextField editAlbumTextField;
     @FXML
     private TextField editArtistTextField;
@@ -121,27 +119,9 @@ public class AppController {
     @FXML
     private Button addButton;
     @FXML
-    private Button addTabClearButton;
-    @FXML
-    private Button addTabUploadAudioButton;
-    @FXML
-    private Button addTabUploadButton;
-    @FXML
     private Button deleteButton;
     @FXML
-    private Button deleteTabDeleteButton;
-    @FXML
     private Button editButton;
-    @FXML
-    private Button editTabClearButton;
-    @FXML
-    private Button editTabEditButton;
-    @FXML
-    private Button editTabUploadAudioButton;
-    @FXML
-    private Button exitButton;
-    @FXML
-    private Button logoutButton;
     @FXML
     private Button viewButton;
 
@@ -161,7 +141,6 @@ public class AppController {
     private Blob audioData;
 
     public void initialize() throws SQLException {
-
         // Initialize viewTable
         viewIDCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         viewTitleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -308,10 +287,92 @@ public class AppController {
         // Allow multiple selections in the editTable
         previewEditTable.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
+        previewEditTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                Song selectedSong = previewEditTable.getSelectionModel().getSelectedItem();
+                editTitleTextField.setText(selectedSong.getTitle());
+                editArtistTextField.setText(selectedSong.getArtist());
+                editAlbumTextField.setText(selectedSong.getAlbum());
+            }
+        });
+
     }
     @FXML
-    void editTabUploadButtonOnAction(ActionEvent event) {
-        uploadAudio();
+    public void editTabEditButtonOnAction(ActionEvent event) {
+        Song selectedSong = previewEditTable.getSelectionModel().getSelectedItem();
+        if (selectedSong != null) {
+            String title = editTitleTextField.getText();
+            String artist = editArtistTextField.getText();
+            String album = editAlbumTextField.getText();
+            String audioFilePath = editSongPathTextField.getText();
+
+            // Validate title
+            if (title == null || title.trim().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Title cannot be empty.", ButtonType.OK);
+                alert.showAndWait();
+                return;
+            }
+
+            // Create a new task to convert the audio file to a Blob in a separate thread
+            Task<Blob> convertAudioTask = new Task<Blob>() {
+                protected Blob call() throws Exception {
+                    if (audioFilePath != null && !audioFilePath.trim().isEmpty()) {
+                        return AudioUploadUtils.convertAudioToBlob(audioFilePath);
+                    }
+                    return null;
+                }
+            };
+
+            // Create a new task to get the duration of the audio file in a separate thread
+            Task<String> getDurationTask = new Task<String>() {
+                @Override
+                protected String call() throws Exception {
+                    if (audioFilePath != null && !audioFilePath.trim().isEmpty()) {
+                        return AudioUploadUtils.getAudioDuration(audioFilePath);
+                    }
+                    return null;
+                }
+            };
+
+            // Create a new task to update the song in the database in a separate thread
+            Task<Void> updateSongTask = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    try {
+                        // Wait for the convertAudioTask and getDurationTask to complete
+                        Blob audioData = convertAudioTask.get();
+                        String length = getDurationTask.get();
+
+                        // delete the old song from the database
+                        DatabaseHandler.getInstance().delete("SONGLIST", "id = " + selectedSong.getId());
+                        // create a new song object
+                        Song newSong = new Song(selectedSong.getId(), title, artist, album, length, audioData);
+                        // add the new song to the database
+                        DatabaseHandler.getInstance().insertSong(newSong);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+
+            // Update the UI when the updateSongTask is done
+            updateSongTask.setOnSucceeded(e -> {
+                // Refresh the tables to reflect the updated song
+                try {
+                    refreshTables();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+            });
+
+            // Start the tasks in new threads
+            new Thread(convertAudioTask).start();
+            new Thread(getDurationTask).start();
+            new Thread(updateSongTask).start();
+            // Refresh the table view
+            previewEditTable.refresh();
+        }
     }
     private boolean validateID(String idAsString) {
         if (idAsString != null && !idAsString.trim().isEmpty()) {
@@ -338,96 +399,95 @@ public class AppController {
         }
         return true;
     }
-
     @FXML
-public void addTabUploadButtonOnAction(ActionEvent event) {
-    try {
-        String idAsString = addTabIDTextField.getText();
-        String title = addTabTitleTextField.getText();
-        String artist = addTabArtistTextField.getText();
-        String album = addTabAlbumTextField.getText();
-        String audioFilePath = addTabAudioPath.getText();
+    public void addTabUploadButtonOnAction(ActionEvent event) {
+        try {
+            String idAsString = addTabIDTextField.getText();
+            String title = addTabTitleTextField.getText();
+            String artist = addTabArtistTextField.getText();
+            String album = addTabAlbumTextField.getText();
+            String audioFilePath = addTabAudioPath.getText();
 
-        // Validate ID
-        if (idAsString != null && !idAsString.trim().isEmpty() && !validateID(idAsString)) {
-            return;
-        }
-
-        // Validate title
-        if (title == null || title.trim().isEmpty()) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, "Title cannot be empty.", ButtonType.OK);
-            alert.showAndWait();
-            return;
-        }
-
-        // Create a new Song object
-        int id;
-        if (idAsString == null || idAsString.trim().isEmpty()) {
-            // If ID is not specified, generate a new ID
-            id = SONGLIST.stream().mapToInt(Song::getId).max().orElse(0) + 1;
-        } else {
-            id = Integer.parseInt(idAsString);
-        }
-
-        // Create a new task to convert the audio file to a Blob in a separate thread
-        Task<Blob> convertAudioTask = new Task<Blob>() {
-            protected Blob call() throws Exception {
-                if (audioFilePath != null && !audioFilePath.trim().isEmpty()) {
-                    return AudioUploadUtils.convertAudioToBlob(audioFilePath);
-                }
-                return null;
+            // Validate ID
+            if (idAsString != null && !idAsString.trim().isEmpty() && !validateID(idAsString)) {
+                return;
             }
-        };
 
-        // Create a new task to get the duration of the audio file in a separate thread
-        Task<String> getDurationTask = new Task<String>() {
-            @Override
-            protected String call() throws Exception {
-                if (audioFilePath != null && !audioFilePath.trim().isEmpty()) {
-                    return AudioUploadUtils.getAudioDuration(audioFilePath);
-                }
-                return null;
+            // Validate title
+            if (title == null || title.trim().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, "Title cannot be empty.", ButtonType.OK);
+                alert.showAndWait();
+                return;
             }
-        };
 
-        // Create a new task to add the new song to the database in a separate thread
-        Task<Void> addSongTask = new Task<Void>() {
-            @Override
-            protected Void call() throws Exception {
+            // Create a new Song object
+            int id;
+            if (idAsString == null || idAsString.trim().isEmpty()) {
+                // If ID is not specified, generate a new ID
+                id = SONGLIST.isEmpty() ? 1 : SONGLIST.stream().mapToInt(Song::getId).max().orElse(0) + 1;
+            } else {
+                id = Integer.parseInt(idAsString);
+            }
+
+            // Create a new task to convert the audio file to a Blob in a separate thread
+            Task<Blob> convertAudioTask = new Task<Blob>() {
+                protected Blob call() throws Exception {
+                    if (audioFilePath != null && !audioFilePath.trim().isEmpty()) {
+                        return AudioUploadUtils.convertAudioToBlob(audioFilePath);
+                    }
+                    return null;
+                }
+            };
+
+            // Create a new task to get the duration of the audio file in a separate thread
+            Task<String> getDurationTask = new Task<String>() {
+                @Override
+                protected String call() throws Exception {
+                    if (audioFilePath != null && !audioFilePath.trim().isEmpty()) {
+                        return AudioUploadUtils.getAudioDuration(audioFilePath);
+                    }
+                    return null;
+                }
+            };
+
+            // Create a new task to add the new song to the database in a separate thread
+            Task<Void> addSongTask = new Task<Void>() {
+                @Override
+                protected Void call() throws Exception {
+                    try {
+                        // Wait for the convertAudioTask and getDurationTask to complete
+                        Blob audioData = convertAudioTask.get();
+                        String length = getDurationTask.get();
+
+                        Song newSong = new Song(id, title, artist, album, length, audioData);
+
+                        // Add the new song to the database
+                        DatabaseHandler.getInstance().insertSong(newSong);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    return null;
+                }
+            };
+
+            // Update the UI when the addSongTask is done
+            addSongTask.setOnSucceeded(e -> {
+                // Refresh the tables to reflect the new song
                 try {
-                    // Wait for the convertAudioTask and getDurationTask to complete
-                    Blob audioData = convertAudioTask.get();
-                    String length = getDurationTask.get();
-
-                    Song newSong = new Song(id, title, artist, album, length, audioData);
-
-                    // Add the new song to the database
-                    DatabaseHandler.getInstance().insertSong(newSong);
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    refreshTables();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
                 }
-                return null;
-            }
-        };
+            });
 
-        // Update the UI when the addSongTask is done
-        addSongTask.setOnSucceeded(e -> {
-            // Refresh the tables to reflect the new song
-            try {
-                refreshTables();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        });
-
-        // Start the tasks in new threads
-        new Thread(convertAudioTask).start();
-        new Thread(getDurationTask).start();
-        new Thread(addSongTask).start();
-    } catch (Exception e) {
-        e.printStackTrace();
+            // Start the tasks in new threads
+            new Thread(convertAudioTask).start();
+            new Thread(getDurationTask).start();
+            new Thread(addSongTask).start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
     @FXML
     void editTabUploadAudioButtonOnAction(ActionEvent event) {
         uploadAudio();
@@ -449,22 +509,9 @@ public void addTabUploadButtonOnAction(ActionEvent event) {
             System.out.println("No file selected");
         }
     }
-
     @FXML
     void exitButtonOnAction(ActionEvent event) {
         System.exit(0);
-    }
-
-    @FXML
-    void previewAddTableOnSort(ActionEvent event) {
-
-    }
-
-
-
-    @FXML
-    void previewEditTableOnSort(ActionEvent event) {
-
     }
     @FXML
     void logoutButtonOnAction(ActionEvent event) {
@@ -487,36 +534,13 @@ public void addTabUploadButtonOnAction(ActionEvent event) {
             alert.close();
         }
     }
-
     @FXML
     void editTabClearButtonOnAction(ActionEvent event){
-
+        editTitleTextField.clear();
+        editArtistTextField.clear();
+        editAlbumTextField.clear();
+        editSongPathTextField.clear();
     }
-
-    @FXML
-    void searchBarOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void tableViewOnSort(ActionEvent event) {
-
-    }
-
-    @FXML
-    void updateButtonOnAction(ActionEvent event) {
-
-    }
-
-    @FXML
-    void viewButtonOnAction(ActionEvent event) {
-    }
-
-    @FXML
-    void updateClearButtonOnAction(ActionEvent event) {
-
-    }
-
     public void refreshTables() throws SQLException {
         // Replace the existing items in the tables with new ObservableLists
         viewTable.setItems(FXCollections.observableArrayList());
@@ -532,16 +556,6 @@ public void addTabUploadButtonOnAction(ActionEvent event) {
         previewDeleteTable.setItems(SONGLIST);
         previewEditTable.setItems(SONGLIST);
     }
-
-    @FXML
-    void viewTableOnSort() {
-        // Get the TableView's comparator
-        Comparator<? super Song> comparator = viewTable.getComparator();
-
-        // Get the sorted data from the TableView's items
-        ObservableList<Song> sortedData = viewTable.getItems();
-    }
-
     public void switchForm(ActionEvent event) {
         if (event.getSource() == viewButton) {
             viewTab.setVisible(true);
@@ -579,7 +593,6 @@ public void addTabUploadButtonOnAction(ActionEvent event) {
                     e.printStackTrace();
                 }
             }
-
             // Refresh the tables to reflect the deletion
             try {
                 refreshTables();
@@ -588,15 +601,6 @@ public void addTabUploadButtonOnAction(ActionEvent event) {
             }
         }
     }
-
-    void addTabAlbumTextFieldOnAction(ActionEvent event) {}
-
-    @FXML
-    void addTabArtistTextFieldOnAction(ActionEvent event) {}
-
-    @FXML
-    void addTabAudioPathOnAction(ActionEvent event) {}
-
     @FXML
     void addTabClearButton(ActionEvent event) {
         // clear all text fields
@@ -611,7 +615,6 @@ public void addTabUploadButtonOnAction(ActionEvent event) {
         // open file chooser and set upload path to text field
         getAudioPath(addTabAudioPath);
     }
-
     private void getAudioPath(TextField addTabAudioPath) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
@@ -629,18 +632,10 @@ public void addTabUploadButtonOnAction(ActionEvent event) {
             System.out.println("No file selected");
         }
     }
-
     @FXML
     public void editAudioUploadButtonOnAction(MouseEvent mouseEvent) {
         // open file chooser and set upload path to text field
         getAudioPath(editSongPathTextField);
-    }
-    @FXML
-    public void editTabEditButtonOnAction(ActionEvent event) {
-    }
-    @FXML
-    public void deleteSearchBarOnAction(ActionEvent event) {
-
     }
 }
 

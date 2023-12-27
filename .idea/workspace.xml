@@ -4,22 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="99% sanity lost, have to change to ikonli, H2 local database, finished all 4 tab for main app">
+    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="update basic function for create tab">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/AudioUploadUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AudioUploadUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/DatabaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/SignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/Song.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/app.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/signup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.mv.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db.trace.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.trace.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.trace.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javafx/application/app.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javafx/application/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javafx/application/signup.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,6 +215,9 @@
       <workItem from="1703314651620" duration="604000" />
       <workItem from="1703349336922" duration="11434000" />
       <workItem from="1703479525914" duration="4000" />
+      <workItem from="1703536464564" duration="125000" />
+      <workItem from="1703667427993" duration="5351000" />
+      <workItem from="1703673883154" duration="758000" />
     </task>
     <task id="LOCAL-00001" summary="init code">
       <option name="closed" value="true" />
@@ -288,7 +283,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703007539178</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="update basic function for create tab">
+      <option name="closed" value="true" />
+      <created>1703536583445</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1703536583445</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,7 +318,8 @@
     <MESSAGE value="I forgot these unversioned files" />
     <MESSAGE value="create an entire new app.fxml to work on" />
     <MESSAGE value="99% sanity lost, have to change to ikonli, H2 local database, finished all 4 tab for main app" />
-    <option name="LAST_COMMIT_MESSAGE" value="99% sanity lost, have to change to ikonli, H2 local database, finished all 4 tab for main app" />
+    <MESSAGE value="update basic function for create tab" />
+    <option name="LAST_COMMIT_MESSAGE" value="update basic function for create tab" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

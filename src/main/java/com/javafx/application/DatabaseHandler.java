@@ -56,7 +56,7 @@ public class DatabaseHandler {
     }
 
 
-    private void createDatabaseAndTableIfNotExist() {
+    static void createDatabaseAndTableIfNotExist() {
         try {
             String sqlSongList = "CREATE TABLE IF NOT EXISTS songlist (" +
                     "id INT PRIMARY KEY, " +
@@ -160,13 +160,14 @@ public class DatabaseHandler {
         }
     }
     public void insertSong(Song song) throws SQLException {
-        String sql = "INSERT INTO SONGLIST (title, album, artist, length, audiodata) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SONGLIST (id, title, album, artist, length, audiodata) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = conn.prepareStatement(sql);
-        statement.setString(1, song.getTitle());
-        statement.setString(2, song.getAlbum());
-        statement.setString(3, song.getArtist());
-        statement.setString(4, song.getLength());
-        statement.setBlob(5, song.getAudioData());
+        statement.setInt(1, song.getId());
+        statement.setString(2, song.getTitle());
+        statement.setString(3, song.getAlbum());
+        statement.setString(4, song.getArtist());
+        statement.setString(5, song.getLength());
+        statement.setBlob(6, song.getAudioData());
         statement.execute();
     }
 }
