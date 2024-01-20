@@ -1,49 +1,29 @@
 package com.javafx.application;
 
-import javafx.scene.control.TextField;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.OutputStream;
-import java.sql.Blob;
-import java.sql.Connection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.security.MessageDigest;
+import java.io.File;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public class AudioUploadUtils {
 
-    private TextField filePathTextField;
-
-    private void openFileChooser() {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Audio Files", "*.mp3", "*.wav", "*.ogg")
-        );
-
-        File selectedFile = fileChooser.showOpenDialog(null);
-
-        if (selectedFile != null) {
-            // Update the file path text field with the selected file path
-            filePathTextField.setText(selectedFile.getAbsolutePath());
+    public static boolean isValidPath(String filePath) {
+        Path path = Paths.get(filePath);
+        if (!Files.exists(path) || Files.isDirectory(path)) {
+            return false;
         }
-    }
 
-    public static byte[] convertAudioToBytes(String filePath) {
-        byte[] audioBytes = null;
-        try {
-            File audioFile = new File(filePath);
-            audioBytes = new byte[(int) audioFile.length()];
-            FileInputStream fileInputStream = new FileInputStream(audioFile);
-            fileInputStream.read(audioBytes);
-            fileInputStream.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return audioBytes;
+        String extension = filePath.substring(filePath.lastIndexOf(".") + 1).toLowerCase();
+        return extension.equals("wav") || extension.equals("mp3") || extension.equals("aac") || extension.equals("ogg") || extension.equals("flac");
     }
 
     public static String getAudioDuration(String audioFilePath) {
@@ -67,24 +47,38 @@ public class AudioUploadUtils {
         return length[0];
     }
 
-    public static Blob convertAudioToBlob(String filePath) {
-        Blob blob = null;
+    public static String uploadAudioToDatabase(String filePath) {
         try {
-            File audioFile = new File(filePath);
-            FileInputStream fis = new FileInputStream(audioFile);
-            Connection conn = DatabaseHandler.getInstance().getConnection();
-            blob = conn.createBlob();
-            OutputStream os = blob.setBinaryStream(1);
-            byte[] buffer = new byte[1024];
-            int bytesRead;
-            while ((bytesRead = fis.read(buffer)) != -1) {
-                os.write(buffer, 0, bytesRead);
+            // Compute SHA-256 hash of the file content
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            try (FileInputStream fis = new FileInputStream(filePath)) {
+                byte[] dataBytes = new byte[1024];
+                int nread;
+                while ((nread = fis.read(dataBytes)) != -1) {
+                    md.update(dataBytes, 0, nread);
+                }
             }
-            os.close();
-            fis.close();
+            byte[] digest = md.digest();
+
+            // Convert byte array to hex string
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : digest) {
+                hexString.append(String.format("%02x", b));
+            }
+            String sha256 = hexString.toString();
+
+            // Get the file extension
+            String extension = filePath.substring(filePath.lastIndexOf("."));
+
+            // Copy the file to the new directory with the name as SHA-256 hash
+            Files.copy(Paths.get(filePath), Paths.get("Songs/" + sha256 + extension), StandardCopyOption.REPLACE_EXISTING);
+
+            // Return the hashed name of the audio file
+            return sha256 + extension;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return blob;
+
+        return null;
     }
 }

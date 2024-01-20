@@ -1,8 +1,6 @@
 package com.javafx.application;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import com.javafx.application.DatabaseHandler;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -64,7 +62,7 @@ public class DatabaseHandler {
                     "artist VARCHAR(255), " +
                     "album VARCHAR(255), " +
                     "length VARCHAR(255), " +
-                    "audiodata BLOB)";
+                    "audiopath VARCHAR(255))";
             PreparedStatement statementSongList = conn.prepareStatement(sqlSongList);
             statementSongList.execute();
 
@@ -150,8 +148,7 @@ public class DatabaseHandler {
                 String artist = resultSet.getString("artist");
                 String album = resultSet.getString("album");
                 String length = resultSet.getString("length");
-                Blob audioData = resultSet.getBlob("audiodata");
-                songs.add(new Song(id, title, artist, album, length, audioData));
+                songs.add(new Song(id, title, artist, album, length));
             }
             return songs;
         } catch (SQLException e) {
@@ -159,15 +156,67 @@ public class DatabaseHandler {
             return Collections.emptyList();
         }
     }
+    public String getSongPath(int id) throws SQLException {
+        String sql = "SELECT audiopath FROM songlist WHERE id = ?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setInt(1, id);
+        ResultSet resultSet = statement.executeQuery();
+        if (resultSet.next()) {
+            return resultSet.getString("audiopath");
+        }
+        return null;
+    }
     public void insertSong(Song song) throws SQLException {
-        String sql = "INSERT INTO SONGLIST (id, title, album, artist, length, audiodata) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO SONGLIST (id, title, album, artist, length, audiopath) VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement statement = conn.prepareStatement(sql);
         statement.setInt(1, song.getId());
         statement.setString(2, song.getTitle());
         statement.setString(3, song.getAlbum());
         statement.setString(4, song.getArtist());
         statement.setString(5, song.getLength());
-        statement.setBlob(6, song.getAudioData());
+        statement.setString(6, song.getAudioPath());
         statement.execute();
+    }
+
+    public void deleteSong(int id) {
+        try {
+            String sql = "DELETE FROM songlist WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setInt(1, id);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSongNoAudio(Song updatedSong) {
+        try {
+            String sql = "UPDATE songlist SET title = ?, album = ?, artist = ?, length = ? WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, updatedSong.getTitle());
+            statement.setString(2, updatedSong.getAlbum());
+            statement.setString(3, updatedSong.getArtist());
+            statement.setString(4, updatedSong.getLength());
+            statement.setInt(5, updatedSong.getId());
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void updateSongWithNewAudio(Song updatedSong) {
+        try {
+            String sql = "UPDATE songlist SET title = ?, album = ?, artist = ?, length = ?, audiopath = ? WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, updatedSong.getTitle());
+            statement.setString(2, updatedSong.getAlbum());
+            statement.setString(3, updatedSong.getArtist());
+            statement.setString(4, updatedSong.getLength());
+            statement.setString(5, updatedSong.getAudioPath());
+            statement.setInt(6, updatedSong.getId());
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

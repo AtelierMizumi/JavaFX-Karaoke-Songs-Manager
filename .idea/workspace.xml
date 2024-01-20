@@ -4,20 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="update basic function for create tab">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/loginspriteart-weeb.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Songs/3ced8ffe11b9f09369d5023d596120105c24150039d5b22191d6a22bedbf251a.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Songs/4031d9a888292b507f9eed679de373ecb70f9757ac2706a41146e0de09752ac6.mp4" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Songs/94c1e221a658556667402f357762c7e76b08c471e011f2964e2bcb75dc363d2a.mov" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/loginspriteart.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/loginspriteart.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/signup.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db.mv.db" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db.mv.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/AudioUploadUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AudioUploadUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/DatabaseHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/Song.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.mv.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db.trace.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/login.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javafx/application/login.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/loginspriteart.png" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javafx/application/loginspriteart.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/signup.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/javafx/application/signup.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,43 +77,43 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "ASKED_MARK_IGNORED_FILES_AS_EXCLUDED": "true",
-    "Downloaded.Files.Path.Enabled": "false",
-    "Repository.Attach.Annotations": "false",
-    "Repository.Attach.JavaDocs": "false",
-    "Repository.Attach.Sources": "false",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "extract.method.default.visibility": "private",
-    "git-widget-placeholder": "master",
-    "import_schema_mapping": "<schema-mapping>\n  <databases>\n    <list>\n      <schema-mapping-item>\n        <source-data-source-id>ed8646d3-47ee-4916-ba89-103cea125abc</source-data-source-id>\n        <source-path>schema/&quot;karaoke&quot;</source-path>\n        <target-data-source-id>ed8646d3-47ee-4916-ba89-103cea125abc</target-data-source-id>\n        <target-path>schema/&quot;karaoke&quot;</target-path>\n      </schema-mapping-item>\n    </list>\n  </databases>\n</schema-mapping>",
-    "jdk.selected.JAVA_MODULE": "openjdk-21",
-    "last_opened_file_path": "C:/Users/Moderator/Downloads/h2driver.jar",
-    "list.type.of.created.stylesheet": "CSS",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "Settings.JavaScript",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;ASKED_MARK_IGNORED_FILES_AS_EXCLUDED&quot;: &quot;true&quot;,
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;import_schema_mapping&quot;: &quot;&lt;schema-mapping&gt;\n  &lt;databases&gt;\n    &lt;list&gt;\n      &lt;schema-mapping-item&gt;\n        &lt;source-data-source-id&gt;ed8646d3-47ee-4916-ba89-103cea125abc&lt;/source-data-source-id&gt;\n        &lt;source-path&gt;schema/&amp;quot;karaoke&amp;quot;&lt;/source-path&gt;\n        &lt;target-data-source-id&gt;ed8646d3-47ee-4916-ba89-103cea125abc&lt;/target-data-source-id&gt;\n        &lt;target-path&gt;schema/&amp;quot;karaoke&amp;quot;&lt;/target-path&gt;\n      &lt;/schema-mapping-item&gt;\n    &lt;/list&gt;\n  &lt;/databases&gt;\n&lt;/schema-mapping&gt;&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;openjdk-21&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Moderator/Downloads/h2driver.jar&quot;,
+    &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Settings.JavaScript&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql",
-      "java.sql.Driver",
-      "h2"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;,
+      &quot;java.sql.Driver&quot;,
+      &quot;h2&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.javafx.application" />
@@ -136,7 +137,7 @@
       <recent name="com.javafx.application" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Login">
+  <component name="RunManager" selected="Application.App">
     <configuration name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.javafx.application.App" />
       <module name="JavaFX" />
@@ -165,8 +166,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Login" />
         <item itemvalue="Application.App" />
+        <item itemvalue="Application.Login" />
       </list>
     </recent_temporary>
   </component>
@@ -232,7 +233,8 @@
       <workItem from="1704182574726" duration="2000" />
       <workItem from="1704182648975" duration="24000" />
       <workItem from="1705750253596" duration="2053000" />
-      <workItem from="1705752620848" duration="2860000" />
+      <workItem from="1705752620848" duration="7098000" />
+      <workItem from="1705765006545" duration="15709000" />
     </task>
     <task id="LOCAL-00001" summary="init code">
       <option name="closed" value="true" />
@@ -306,7 +308,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703536583445</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="remove weeb element, add ext lib to project structure">
+      <option name="closed" value="true" />
+      <created>1705755783716</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1705755783716</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -364,7 +374,8 @@
     <MESSAGE value="create an entire new app.fxml to work on" />
     <MESSAGE value="99% sanity lost, have to change to ikonli, H2 local database, finished all 4 tab for main app" />
     <MESSAGE value="update basic function for create tab" />
-    <option name="LAST_COMMIT_MESSAGE" value="update basic function for create tab" />
+    <MESSAGE value="remove weeb element, add ext lib to project structure" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove weeb element, add ext lib to project structure" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

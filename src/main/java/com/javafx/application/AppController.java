@@ -1,5 +1,6 @@
 package com.javafx.application;
 
+import java.awt.Desktop;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -15,12 +16,17 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import org.kordamp.ikonli.javafx.FontIcon;
-import java.sql.Blob;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import javafx.concurrent.Task;
 
 import java.io.File;
 import java.sql.SQLException;
-import java.util.Comparator;
 import java.util.Optional;
 
 public class AppController {
@@ -138,7 +144,6 @@ public class AppController {
     // FontIcon
     @FXML
     private FontIcon editAudioUploadButton;
-    private Blob audioData;
 
     public void initialize() throws SQLException {
         // Initialize viewTable
@@ -153,6 +158,35 @@ public class AppController {
         // Create a FilteredList wrapping the ObservableList
         FilteredList<Song> viewTabFilteredList = new FilteredList<>(SONGLIST, p -> true);
 
+        viewTable.setOnMouseClicked(event -> {
+            if (event.getClickCount() == 2) {  // Check if it's a double click event
+                // Get the selected song from the table
+                Song selectedSong = viewTable.getSelectionModel().getSelectedItem();
+
+                if (selectedSong != null) {
+                    // Get the audio file path of the selected song
+                    String audioFilePath = null;
+                    try {
+                        audioFilePath = "Songs/" + DatabaseHandler.getInstance().getSongPath(selectedSong.getId());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
+                    // Create a File object from the audio file path
+                    File audioFile = new File(audioFilePath);
+
+                    // Check if the audio file exists
+                    if (audioFile.exists()) {
+                        // Open the audio file with the user's preferred media player
+                        try {
+                            Desktop.getDesktop().open(audioFile);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            }
+        });
         // Set the filter Predicate whenever the filter changes
         searchBar.textProperty().addListener((observable, oldValue, newValue) -> {
             viewTabFilteredList.setPredicate(song -> {
@@ -301,6 +335,7 @@ public class AppController {
     public void editTabEditButtonOnAction(ActionEvent event) {
         Song selectedSong = previewEditTable.getSelectionModel().getSelectedItem();
         if (selectedSong != null) {
+            String idAsString = Integer.toString(selectedSong.getId());
             String title = editTitleTextField.getText();
             String artist = editArtistTextField.getText();
             String album = editAlbumTextField.getText();
@@ -313,13 +348,15 @@ public class AppController {
                 return;
             }
 
-            // Create a new task to convert the audio file to a Blob in a separate thread
-            Task<Blob> convertAudioTask = new Task<Blob>() {
-                protected Blob call() throws Exception {
+            // Upload the audio file to the Songs folder
+            Task<String> uploadAudioTask = new Task<String>() {
+                @Override
+                protected String call() throws Exception {
+                    String hashedName = null;
                     if (audioFilePath != null && !audioFilePath.trim().isEmpty()) {
-                        return AudioUploadUtils.convertAudioToBlob(audioFilePath);
+                        hashedName = AudioUploadUtils.uploadAudioToDatabase(audioFilePath);
                     }
-                    return null;
+                    return hashedName;
                 }
             };
 
@@ -338,20 +375,30 @@ public class AppController {
             Task<Void> updateSongTask = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    try {
-                        // Wait for the convertAudioTask and getDurationTask to complete
-                        Blob audioData = convertAudioTask.get();
-                        String length = getDurationTask.get();
+                    // Get the hashed name and duration from the previous tasks
+                    String hashedName = uploadAudioTask.get();
+                    String duration = getDurationTask.get();
 
-                        // delete the old song from the database
-                        DatabaseHandler.getInstance().delete("SONGLIST", "id = " + selectedSong.getId());
-                        // create a new song object
-                        Song newSong = new Song(selectedSong.getId(), title, artist, album, length, audioData);
-                        // add the new song to the database
-                        DatabaseHandler.getInstance().insertSong(newSong);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    // Create a new Song object
+                    int id = Integer.parseInt(idAsString);
+                    if (hashedName == null) {
+                        Song updatedSong = new Song(id, title, artist, album, duration, null);
+                        DatabaseHandler.getInstance().updateSongNoAudio(updatedSong);
+                    } else {
+                        // delete old audio file
+                        String oldAudioFilePath = DatabaseHandler.getInstance().getSongPath(id);
+                        if (oldAudioFilePath != null) {
+                            // Prepend the path of the Songs directory to the audio file path
+                            oldAudioFilePath = "Songs/" + oldAudioFilePath;
+
+                            // Delete the audio file
+                            Path audioPath = Paths.get(oldAudioFilePath);
+                            Files.deleteIfExists(audioPath);
+                        }
+                        Song updatedSong = new Song(id, title, artist, album, duration, hashedName);
+                        DatabaseHandler.getInstance().updateSongWithNewAudio(updatedSong);
                     }
+
                     return null;
                 }
             };
@@ -367,11 +414,9 @@ public class AppController {
             });
 
             // Start the tasks in new threads
-            new Thread(convertAudioTask).start();
+            new Thread(uploadAudioTask).start();
             new Thread(getDurationTask).start();
             new Thread(updateSongTask).start();
-            // Refresh the table view
-            previewEditTable.refresh();
         }
     }
     private boolean validateID(String idAsString) {
@@ -429,13 +474,15 @@ public class AppController {
                 id = Integer.parseInt(idAsString);
             }
 
-            // Create a new task to convert the audio file to a Blob in a separate thread
-            Task<Blob> convertAudioTask = new Task<Blob>() {
-                protected Blob call() throws Exception {
+            // Upload the audio file to the Songs folder
+            Task<String> uploadAudioTask = new Task<String>() {
+                @Override
+                protected String call() throws Exception {
+                    String hashedName = null;
                     if (audioFilePath != null && !audioFilePath.trim().isEmpty()) {
-                        return AudioUploadUtils.convertAudioToBlob(audioFilePath);
+                        hashedName = AudioUploadUtils.uploadAudioToDatabase(audioFilePath);
                     }
-                    return null;
+                    return hashedName;
                 }
             };
 
@@ -454,22 +501,26 @@ public class AppController {
             Task<Void> addSongTask = new Task<Void>() {
                 @Override
                 protected Void call() throws Exception {
-                    try {
-                        // Wait for the convertAudioTask and getDurationTask to complete
-                        Blob audioData = convertAudioTask.get();
-                        String length = getDurationTask.get();
+                    // Get the hashed name and duration from the previous tasks
+                    String hashedName = uploadAudioTask.get();
+                    String duration = getDurationTask.get();
 
-                        Song newSong = new Song(id, title, artist, album, length, audioData);
-
-                        // Add the new song to the database
-                        DatabaseHandler.getInstance().insertSong(newSong);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    // Create a new Song object
+                    int id;
+                    if (idAsString == null || idAsString.trim().isEmpty()) {
+                        // If ID is not specified, generate a new ID
+                        id = SONGLIST.isEmpty() ? 1 : SONGLIST.stream().mapToInt(Song::getId).max().orElse(0) + 1;
+                    } else {
+                        id = Integer.parseInt(idAsString);
                     }
+                    Song newSong = new Song(id, title, artist, album, duration, hashedName);
+
+                    // Add the new song to the database
+                    DatabaseHandler.getInstance().insertSong(newSong);
+
                     return null;
                 }
             };
-
             // Update the UI when the addSongTask is done
             addSongTask.setOnSucceeded(e -> {
                 // Refresh the tables to reflect the new song
@@ -481,7 +532,7 @@ public class AppController {
             });
 
             // Start the tasks in new threads
-            new Thread(convertAudioTask).start();
+            new Thread(uploadAudioTask).start();
             new Thread(getDurationTask).start();
             new Thread(addSongTask).start();
         } catch (Exception e) {
@@ -490,21 +541,19 @@ public class AppController {
     }
     @FXML
     void editTabUploadAudioButtonOnAction(ActionEvent event) {
-        uploadAudio();
+        getMediaPath(editSongPathTextField);
     }
 
     private void uploadAudio() {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac", "*.ogg", "*.flac")
+                new FileChooser.ExtensionFilter("Media Files", "*.wav", "*.mp3", "*.aac", "*.ogg", "*.flac", "*.mp4", "*.avi", "*.mkv")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
-            // Use the selected file
             String audioFilePath = selectedFile.getAbsolutePath();
-            // Now you can use the path wherever you need it
         } else {
             System.out.println("No file selected");
         }
@@ -588,8 +637,27 @@ public class AppController {
             // Remove all selected songs from the database
             for (Song song : selectedSongs) {
                 try {
-                    DatabaseHandler.getInstance().delete("SONGLIST", "id = " + song.getId());
+                    // Get the audio file path from the database
+                    String audioFilePath = DatabaseHandler.getInstance().getSongPath(song.getId());
+
+                    if (audioFilePath != null) {
+                        // Prepend the path of the Songs directory to the audio file path
+                        audioFilePath = "Songs/" + audioFilePath;
+
+                        // Delete the audio file
+                        Path audioPath = Paths.get(audioFilePath);
+                        Files.deleteIfExists(audioPath);
+                    }
+
+                    // Delete the song from the database
+                    DatabaseHandler.getInstance().deleteSong(song.getId());
+                } catch (NoSuchFileException e) {
+                    System.out.println("File or directory does not exist, skipping deletion.");
                 } catch (SQLException e) {
+                    System.out.println("SQLException while deleting song from the database: " + e.getMessage());
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    System.out.println("IOException while deleting audio file: " + e.getMessage());
                     e.printStackTrace();
                 }
             }
@@ -597,7 +665,8 @@ public class AppController {
             try {
                 refreshTables();
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                System.out.println("SQLException while refreshing tables: " + e.getMessage());
+                e.printStackTrace();
             }
         }
     }
@@ -613,13 +682,13 @@ public class AppController {
     @FXML
     public void addTabUploadAudioButtonOnAction(ActionEvent event) {
         // open file chooser and set upload path to text field
-        getAudioPath(addTabAudioPath);
+        getMediaPath(addTabAudioPath);
     }
-    private void getAudioPath(TextField addTabAudioPath) {
+    private void getMediaPath(TextField addTabAudioPath) {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Audio Files", "*.wav", "*.mp3", "*.aac", "*.ogg", "*.flac")
+                new FileChooser.ExtensionFilter("Media Files", "*.wav", "*.mp3", "*.aac", "*.ogg", "*.flac", "*.mp4", "*.avi", "*.mkv")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
 
@@ -634,8 +703,7 @@ public class AppController {
     }
     @FXML
     public void editAudioUploadButtonOnAction(MouseEvent mouseEvent) {
-        // open file chooser and set upload path to text field
-        getAudioPath(editSongPathTextField);
+        getMediaPath(editSongPathTextField);
     }
 }
 
