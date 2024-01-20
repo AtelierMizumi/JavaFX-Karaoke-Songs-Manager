@@ -21,7 +21,7 @@
                </font></Label>
             <ImageView fitHeight="311.0" fitWidth="210.0" layoutX="2.0" layoutY="85.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@loginspriteart.png" />
+                  <Image url="@loginspriteart-weeb.png" />
                </image>
             </ImageView>
          </children></AnchorPane>

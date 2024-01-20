@@ -143,7 +143,7 @@ public class LoginController {
         double y = point.getY() + passwordField.getHeight();
         passwordToolTip.show(passwordField, x, y);
 
-        currentTooltip = passwordToolTip; // Add this line
+        currentTooltip = passwordToolTip;
 
         passwordField.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
