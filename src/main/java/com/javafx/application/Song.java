@@ -9,11 +9,11 @@ public class Song {
     private String length;
     private String audioPath;
 
-    public Song(int id, String title, String album, String artist, String length, String audioPath) {
+    public Song(int id, String title, String artist, String album, String length, String audioPath) {
         this.id = id;
         this.title = title;
-        this.album = album;
         this.artist = artist;
+        this.album = album;
         this.length = length;
         this.audioPath = audioPath;
     }

@@ -191,32 +191,39 @@ public class DatabaseHandler {
 
     public void updateSongNoAudio(Song updatedSong) {
         try {
-            String sql = "UPDATE songlist SET title = ?, album = ?, artist = ?, length = ? WHERE id = ?";
+            String sql = "UPDATE songlist SET title = ?, artist = ?, album = ? WHERE id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, updatedSong.getTitle());
-            statement.setString(2, updatedSong.getAlbum());
-            statement.setString(3, updatedSong.getArtist());
-            statement.setString(4, updatedSong.getLength());
-            statement.setInt(5, updatedSong.getId());
+            statement.setString(2, updatedSong.getArtist());
+            statement.setString(3, updatedSong.getAlbum());
+            statement.setInt(4, updatedSong.getId());
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+    public boolean isAdmin(String username) throws SQLException {
+        // Query to check if the user is an admin
+        String query = "SELECT ADMIN_PRIVILEGE FROM users WHERE username = ?";
+        PreparedStatement pstmt = conn.prepareStatement(query);
+        pstmt.setString(1, username);
+        ResultSet rs = pstmt.executeQuery();
 
-    public void updateSongWithNewAudio(Song updatedSong) {
-        try {
-            String sql = "UPDATE songlist SET title = ?, album = ?, artist = ?, length = ?, audiopath = ? WHERE id = ?";
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1, updatedSong.getTitle());
-            statement.setString(2, updatedSong.getAlbum());
-            statement.setString(3, updatedSong.getArtist());
-            statement.setString(4, updatedSong.getLength());
-            statement.setString(5, updatedSong.getAudioPath());
-            statement.setInt(6, updatedSong.getId());
-            statement.execute();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if (rs.next()) {
+            return rs.getBoolean("ADMIN_PRIVILEGE");
         }
+
+        return false;
+    }
+    public void updateSongWithNewAudio(Song updatedSong) throws SQLException {
+        String sql = "UPDATE songlist SET title = ?, artist = ?, album = ?, length = ?, audiopath = ? WHERE id = ?";
+        PreparedStatement statement = conn.prepareStatement(sql);
+        statement.setString(1, updatedSong.getTitle());
+        statement.setString(2, updatedSong.getArtist());
+        statement.setString(3, updatedSong.getAlbum());
+        statement.setString(4, updatedSong.getLength());
+        statement.setString(5, updatedSong.getAudioPath());
+        statement.setInt(6, updatedSong.getId());
+        statement.execute();
     }
 }

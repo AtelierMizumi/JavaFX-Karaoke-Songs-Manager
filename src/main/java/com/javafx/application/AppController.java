@@ -449,8 +449,8 @@ public class AppController {
         try {
             String idAsString = addTabIDTextField.getText();
             String title = addTabTitleTextField.getText();
-            String artist = addTabArtistTextField.getText();
             String album = addTabAlbumTextField.getText();
+            String artist = addTabArtistTextField.getText();
             String audioFilePath = addTabAudioPath.getText();
 
             // Validate ID
@@ -513,7 +513,7 @@ public class AppController {
                     } else {
                         id = Integer.parseInt(idAsString);
                     }
-                    Song newSong = new Song(id, title, artist, album, duration, hashedName);
+                    Song newSong = new Song(id, title, album, artist, duration, hashedName);
 
                     // Add the new song to the database
                     DatabaseHandler.getInstance().insertSong(newSong);
