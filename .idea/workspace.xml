@@ -4,27 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/UserApp.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/UserAppController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/user-app.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor, fix search for real, admin mode &amp; normal user.&#10;&#10;Final touch of midas">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Songs/3ced8ffe11b9f09369d5023d596120105c24150039d5b22191d6a22bedbf251a.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Songs/4031d9a888292b507f9eed679de373ecb70f9757ac2706a41146e0de09752ac6.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AdminApp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/AppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AdminAppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/AudioUploadUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/AudioUploadUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/DatabaseHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/DatabaseHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/LoginController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/SignupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/SignupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/javafx/application/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/javafx/application/Song.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/app.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/com/javafx/application/app.fxml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +89,7 @@
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "Settings.JavaScript",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "vue.rearranger.settings.migration": "true"
   },
   "keyToStringList": {
@@ -264,7 +245,8 @@
       <workItem from="1705995922174" duration="3946000" />
       <workItem from="1706001092118" duration="6405000" />
       <workItem from="1706019583419" duration="7287000" />
-      <workItem from="1706027035600" duration="2811000" />
+      <workItem from="1706027035600" duration="3292000" />
+      <workItem from="1706030739165" duration="477000" />
     </task>
     <task id="LOCAL-00001" summary="init code">
       <option name="closed" value="true" />
@@ -346,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705755783716</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor, fix search for real, admin mode &amp; normal user.&#10;&#10;Final touch of midas">
+      <option name="closed" value="true" />
+      <created>1706030326716</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706030326716</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -407,7 +397,9 @@
     <MESSAGE value="remove weeb element, add ext lib to project structure" />
     <MESSAGE value="add /Songs to gitignore, support linux audio playback through xdg-open" />
     <MESSAGE value="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor" />
-    <option name="LAST_COMMIT_MESSAGE" value="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor" />
+    <MESSAGE value="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor, fix search for real, admin mode &amp; normal user.&#10;&#10;Final touch" />
+    <MESSAGE value="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor, fix search for real, admin mode &amp; normal user.&#10;&#10;Final touch of midas" />
+    <option name="LAST_COMMIT_MESSAGE" value="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor, fix search for real, admin mode &amp; normal user.&#10;&#10;Final touch of midas" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
