@@ -22,10 +22,6 @@ public class SignupController {
     @FXML
     private TextField textFieldUsername;
     @FXML
-    private Button showPasswordButton;
-    @FXML
-    private Button showConfirmPasswordButton;
-    @FXML
     public void initialize() {
         passwordField.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER){
@@ -47,10 +43,10 @@ public class SignupController {
             // close signup window
             Stage stage = (Stage) passwordField.getScene().getWindow();
             stage.close();
-            // open login window
+            // open user app window
             try {
                 Stage stage1 = (Stage) passwordField.getScene().getWindow();
-                LaunchGUI.launch(stage1, "app.fxml", "Song Library");
+                LaunchGUI.launch(stage1, "user-app.fxml", "Karaoke Player");
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -77,10 +73,10 @@ public class SignupController {
     private String validateSignup(String username, String password, String confirmPassword) {
         if (username.isEmpty() || password.isEmpty()) {
             return "Username and password cannot be empty.";
-        } else if (username.length() < 6) {
-            return "Username must be at least 6 characters.";
-        } else if (password.length() < 6 || confirmPassword.length() < 6) {
-            return "Password must be at least 6 characters.";
+        } else if (username.length() < 5) {
+            return "Username must be at least 5 characters.";
+        } else if (password.length() < 5 || confirmPassword.length() < 5) {
+            return "Password must be at least 5 characters.";
         } else if (username.contains(" ")) {
             return "Username cannot contain space.";
         } else if (password.contains(" ")) {

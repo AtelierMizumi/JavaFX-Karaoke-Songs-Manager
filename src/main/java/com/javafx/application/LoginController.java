@@ -21,8 +21,6 @@ public class LoginController {
     public Button loginButton;
     @FXML
     private TextField textFieldUsername;
-    @FXML
-    private Button showPasswordButton;
 
     @FXML
     public void initialize() {
@@ -39,8 +37,12 @@ public class LoginController {
 
         String result = validateLogin(username, password);
         Alert alert;
-        if (result.equals("Login successful")) {
-            alert = new Alert(Alert.AlertType.INFORMATION, result, ButtonType.OK);
+        if (result.equals("true") || result.equals("false")) {
+            if (result.equals("true")) {
+                alert = new Alert(Alert.AlertType.INFORMATION, "Login successful with admin privilege", ButtonType.OK);
+            } else {
+                alert = new Alert(Alert.AlertType.INFORMATION, "Login successful", ButtonType.OK);
+            }
             alert.setTitle("Login Successful");
             alert.setHeaderText(null);
             Optional<ButtonType> resultButtonType = alert.showAndWait();
@@ -51,7 +53,11 @@ public class LoginController {
                 // open app window
                 try {
                     Stage stage1 = (Stage) passwordField.getScene().getWindow();
-                    LaunchGUI.launch(stage1, "app.fxml", "Song Manager");
+                    if (result.equals("true")) {
+                        LaunchGUI.launch(stage1, "admin-app.fxml", "Admin App");
+                    } else {
+                        LaunchGUI.launch(stage1, "user-app.fxml", "User App");
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -91,14 +97,12 @@ public class LoginController {
             return "Username cannot be empty";
         } else if (password.isEmpty()) {
             return "Password field cannot be empty";
-        } else if (username.length() < 6 || password.length() < 6) {
-            return "Username and password must be at least 6 characters long";
         } else if (username.contains(" ") || password.contains(" ")) {
             return "Username and password cannot contain space";
         } else {
             try {
                 Connection connection = DatabaseHandler.getInstance().getConnection();
-                String sql = "SELECT password, salt FROM userinfo WHERE username = ?";
+                String sql = "SELECT password, salt, ADMIN_PRIVILEGE FROM userinfo WHERE username = ?";
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, username);
                 ResultSet resultSet = statement.executeQuery();
@@ -107,8 +111,9 @@ public class LoginController {
                 } else {
                     String storedPassword = resultSet.getString("password");
                     String salt = resultSet.getString("salt");
+                    int privilege = resultSet.getInt("ADMIN_PRIVILEGE");
                     if (PasswordUtils.checkPassword(password, storedPassword, salt)) {
-                        return "Login successful";
+                        return String.valueOf(privilege == 1);
                     } else {
                         return "Wrong password";
                     }

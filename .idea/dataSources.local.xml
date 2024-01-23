@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-232.10203.10">
-    <data-source name="db" uuid="04100ecf-9228-4607-b5c1-0d7d0bad53c8">
-      <database-info product="H2" version="2.2.224 (2023-09-17)" jdbc-version="4.2" driver-name="H2 JDBC Driver" driver-version="2.2.224 (2023-09-17)" dbms="H2" exact-version="2.2.224" exact-driver-version="2.2">
+  <component name="dataSourceStorageLocal" created-in="IU-232.10227.8">
+    <data-source name="default@localhost" uuid="9d92d3f4-5aad-4639-867b-7ac7406441a0">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="H2" exact-version="0" />
+      <secret-storage>master_key</secret-storage>
+      <schema-mapping />
+    </data-source>
+    <data-source name="db" uuid="789a14a3-034e-4176-86fe-c8b5c7b365b1">
+      <database-info product="H2" version="2.2.220 (2023-07-04)" jdbc-version="4.2" driver-name="H2 JDBC Driver" driver-version="2.2.220 (2023-07-04)" dbms="H2" exact-version="2.2.220" exact-driver-version="2.2">
         <identifier-quote-string>&quot;</identifier-quote-string>
       </database-info>
       <case-sensitivity plain-identifiers="upper" quoted-identifiers="exact" />
       <secret-storage>master_key</secret-storage>
-      <user-name>thuanc177</user-name>
+      <user-name>admin</user-name>
       <schema-mapping>
         <introspection-scope>
           <node kind="database" qname="@">

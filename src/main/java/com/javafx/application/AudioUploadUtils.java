@@ -16,16 +16,6 @@ import java.util.concurrent.TimeUnit;
 
 public class AudioUploadUtils {
 
-    public static boolean isValidPath(String filePath) {
-        Path path = Paths.get(filePath);
-        if (!Files.exists(path) || Files.isDirectory(path)) {
-            return false;
-        }
-
-        String extension = filePath.substring(filePath.lastIndexOf(".") + 1).toLowerCase();
-        return extension.equals("wav") || extension.equals("mp3") || extension.equals("aac") || extension.equals("ogg") || extension.equals("flac");
-    }
-
     public static String getAudioDuration(String audioFilePath) {
         Media media = new Media(new File(audioFilePath).toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -70,8 +60,29 @@ public class AudioUploadUtils {
             // Get the file extension
             String extension = filePath.substring(filePath.lastIndexOf("."));
 
+            // create the Songs directory if it doesn't exist
+            Path path = Paths.get("Songs");
+            if (!Files.exists(path)) {
+                Files.createDirectory(path);
+            }
+
+            // Check if the directory was created successfully
+            if (Files.exists(path)) {
+                System.out.println("Directory created successfully");
+            } else {
+                System.out.println("Failed to create directory");
+            }
+
             // Copy the file to the new directory with the name as SHA-256 hash
-            Files.copy(Paths.get(filePath), Paths.get("Songs/" + sha256 + extension), StandardCopyOption.REPLACE_EXISTING);
+            Path targetPath = Paths.get("Songs/" + sha256 + extension);
+            Files.copy(Paths.get(filePath), targetPath, StandardCopyOption.REPLACE_EXISTING);
+
+            // Check if the file was copied successfully
+            if (Files.exists(targetPath)) {
+                System.out.println("File copied successfully");
+            } else {
+                System.out.println("Failed to copy file");
+            }
 
             // Return the hashed name of the audio file
             return sha256 + extension;

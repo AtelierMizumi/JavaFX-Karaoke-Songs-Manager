@@ -8,7 +8,7 @@ import java.util.List;
 
 public class DatabaseHandler {
     private static DatabaseHandler handler = null;
-    private static final String DB_URL = "jdbc:h2:file:./src/main/resources/db;user=thuanc177;password=Admin@123";
+    private static final String DB_URL = "jdbc:h2:file:./db;user=admin;password=Admin@123";
     private static Connection conn = null;
     private DatabaseHandler() {
         try {
