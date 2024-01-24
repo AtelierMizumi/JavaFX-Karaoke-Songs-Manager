@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor, fix search for real, admin mode &amp; normal user.&#10;&#10;Final touch of midas">
+    <list default="true" id="0b581765-0123-454c-9536-201d7355dc0c" name="Changes" comment="unsynced git commit nuked old fxml for admin panel lel">
+      <change afterPath="$PROJECT_DIR$/img.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img_1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/img_2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/com/javafx/application/app.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/javafx/application/admin-app.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,6 +251,7 @@
       <workItem from="1706019583419" duration="7287000" />
       <workItem from="1706027035600" duration="3292000" />
       <workItem from="1706030739165" duration="477000" />
+      <workItem from="1706056122637" duration="740000" />
     </task>
     <task id="LOCAL-00001" summary="init code">
       <option name="closed" value="true" />
@@ -338,7 +341,15 @@
       <option name="project" value="LOCAL" />
       <updated>1706030326716</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="unsynced git commit nuked old fxml for admin panel lel">
+      <option name="closed" value="true" />
+      <created>1706034834795</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706034834795</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -401,7 +412,8 @@
     <MESSAGE value="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor" />
     <MESSAGE value="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor, fix search for real, admin mode &amp; normal user.&#10;&#10;Final touch" />
     <MESSAGE value="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor, fix search for real, admin mode &amp; normal user.&#10;&#10;Final touch of midas" />
-    <option name="LAST_COMMIT_MESSAGE" value="add /Songs to gitignore, support linux audio playback through xdg-open, change database directory, fix Song contructor, fix search for real, admin mode &amp; normal user.&#10;&#10;Final touch of midas" />
+    <MESSAGE value="unsynced git commit nuked old fxml for admin panel lel" />
+    <option name="LAST_COMMIT_MESSAGE" value="unsynced git commit nuked old fxml for admin panel lel" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
